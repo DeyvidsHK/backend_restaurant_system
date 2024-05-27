@@ -21,9 +21,9 @@ public class DishController {
 
     @GetMapping(path = "/List")
     @Operation(summary = "Obtener lista de comidas")
-    public ResponseEntity<DishPaginationDTO> getAllDish(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int siz){
+    public ResponseEntity<DishPaginationDTO> getAllDish(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         
-        DishPaginationDTO dishPage = dishService.getAllDish(page, siz);
+        DishPaginationDTO dishPage = dishService.getAllDish(page, size);
         
         return ResponseEntity.ok().body(dishPage);
     }
