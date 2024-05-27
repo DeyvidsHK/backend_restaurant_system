@@ -1,4 +1,4 @@
-package com.restaurant.system.backend_restaurant_system.dto;
+package com.restaurant.system.backend_restaurant_system.dto.pagination;
 
 import java.util.List;
 

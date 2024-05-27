@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restaurant.system.backend_restaurant_system.dto.CategoryPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.dto.DeleteResponseDTO;
+import com.restaurant.system.backend_restaurant_system.dto.pagination.CategoryPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.persistence.entity.Category;
 import com.restaurant.system.backend_restaurant_system.dto.CategoryDTO;
 import com.restaurant.system.backend_restaurant_system.service.CategoryService;

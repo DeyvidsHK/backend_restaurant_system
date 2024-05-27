@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restaurant.system.backend_restaurant_system.dto.RoomPaginationDTO;
+import com.restaurant.system.backend_restaurant_system.dto.pagination.RoomPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.service.RoomService;
 
 import io.swagger.v3.oas.annotations.Operation;

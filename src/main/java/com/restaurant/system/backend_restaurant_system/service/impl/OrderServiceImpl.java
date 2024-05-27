@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.restaurant.system.backend_restaurant_system.dto.OrderPaginationDTO;
+import com.restaurant.system.backend_restaurant_system.dto.pagination.OrderPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.persistence.entity.Order;
 import com.restaurant.system.backend_restaurant_system.persistence.repository.OrderRepository;
 import com.restaurant.system.backend_restaurant_system.service.OrderService;
