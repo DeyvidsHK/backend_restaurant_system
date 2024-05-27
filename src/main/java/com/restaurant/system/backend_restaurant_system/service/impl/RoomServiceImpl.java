@@ -1,10 +1,13 @@
 package com.restaurant.system.backend_restaurant_system.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.restaurant.system.backend_restaurant_system.dto.DeleteResponseDTO;
 import com.restaurant.system.backend_restaurant_system.dto.RoomDTO;
 import com.restaurant.system.backend_restaurant_system.dto.pagination.RoomPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.persistence.entity.Room;
@@ -36,6 +39,17 @@ public class RoomServiceImpl implements RoomService{
         Room savedRoom = roomRepository.save(newRoom);
     
         return savedRoom;
+    }
+
+    @Override
+    public DeleteResponseDTO deleteRoomById(Long id) {
+        Optional<Room> optionalRoom = roomRepository.findById(id);
+        if (optionalRoom.isPresent()) {
+            roomRepository.delete(optionalRoom.get());
+            return new DeleteResponseDTO(true, "Room deleted successfully", null);
+        } else {
+            return new DeleteResponseDTO(false, "Room not found", null);
+        }
     }
     
     
