@@ -1,13 +1,21 @@
 package com.restaurant.system.backend_restaurant_system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restaurant.system.backend_restaurant_system.dto.DeleteResponseDTO;
+import com.restaurant.system.backend_restaurant_system.dto.UserDTO;
 import com.restaurant.system.backend_restaurant_system.dto.UserPaginationDTO;
+import com.restaurant.system.backend_restaurant_system.persistence.entity.User;
 import com.restaurant.system.backend_restaurant_system.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +37,21 @@ public class UserController {
         UserPaginationDTO userPage = userService.getAllUser(page, size);
 
         return ResponseEntity.ok().body(userPage);
+    }
+
+    @PostMapping("/Create")
+    @Operation(summary = "Crear un nuevo usuario")
+    public ResponseEntity<User> createUser(@RequestBody UserDTO userDTO) {
+        User createdUser = userService.createUser(userDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    @DeleteMapping("/Delete/{id}")
+    @Operation(summary = "Eliminar un usuario por su ID")
+    public ResponseEntity<DeleteResponseDTO> deleteUserById(@PathVariable Long id) {
+        DeleteResponseDTO response = userService.deleteUserById(id);
+        HttpStatus status = response.isSuccess() ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+        return ResponseEntity.status(status).body(response);
     }
     
 
