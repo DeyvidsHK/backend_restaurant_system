@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restaurant.system.backend_restaurant_system.dto.CategoryPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.service.CategoryService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
-@RequestMapping(path = "/category")
+@RequestMapping(path = "/Category")
 public class CategoryController {
     
 
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/list")
+    @GetMapping("/List")
+    @Operation(summary = "Obtener lista de categorias")
     public ResponseEntity<CategoryPaginationDTO> getAllCategories(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         
         CategoryPaginationDTO categoriesPage = categoryService.getAllCategories(page, size);

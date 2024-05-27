@@ -20,4 +20,6 @@ public class Room {
 
     private Integer capacity;
 
+    private Boolean state;
+
 }
