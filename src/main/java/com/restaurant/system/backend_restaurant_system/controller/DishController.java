@@ -19,9 +19,11 @@ import com.restaurant.system.backend_restaurant_system.persistence.entity.Dish;
 import com.restaurant.system.backend_restaurant_system.service.DishService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "/Dish")
+@Tag(name = "Dish")
 public class DishController {
 
     @Autowired

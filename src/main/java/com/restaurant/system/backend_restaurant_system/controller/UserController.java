@@ -11,10 +11,12 @@ import com.restaurant.system.backend_restaurant_system.dto.UserPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
 @RequestMapping(path = "/User")
+@Tag(name = "User")
 public class UserController {
     
     @Autowired

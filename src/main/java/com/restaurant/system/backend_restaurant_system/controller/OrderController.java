@@ -11,9 +11,11 @@ import com.restaurant.system.backend_restaurant_system.dto.pagination.OrderPagin
 import com.restaurant.system.backend_restaurant_system.service.OrderService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "/Order")
+@Tag(name = "Order")
 public class OrderController {
 
     @Autowired

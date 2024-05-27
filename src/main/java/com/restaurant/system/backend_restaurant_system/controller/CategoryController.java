@@ -19,9 +19,11 @@ import com.restaurant.system.backend_restaurant_system.dto.CategoryDTO;
 import com.restaurant.system.backend_restaurant_system.service.CategoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "/Category")
+@Tag(name = "Category")
 public class CategoryController {
     
 

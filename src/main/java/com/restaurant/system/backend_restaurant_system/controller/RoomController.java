@@ -11,9 +11,11 @@ import com.restaurant.system.backend_restaurant_system.dto.pagination.RoomPagina
 import com.restaurant.system.backend_restaurant_system.service.RoomService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "/Room")
+@Tag(name = "Room")
 public class RoomController {
 
     @Autowired
