@@ -2,7 +2,7 @@ package com.restaurant.system.backend_restaurant_system.dto.pagination;
 
 import java.util.List;
 
-import com.restaurant.system.backend_restaurant_system.persistence.entity.Order;
+import com.restaurant.system.backend_restaurant_system.dto.OrderDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +14,6 @@ public class OrderPaginationDTO {
     private int totalPages;
     private long totalElements;
     private int size;
-    private List<Order> results;
+    private List<OrderDTO> results;
     
 }
