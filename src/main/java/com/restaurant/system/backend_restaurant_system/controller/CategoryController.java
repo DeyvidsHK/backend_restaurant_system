@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.system.backend_restaurant_system.dto.DeleteResponseDTO;
+import com.restaurant.system.backend_restaurant_system.dto.MessageDTO;
 import com.restaurant.system.backend_restaurant_system.dto.pagination.CategoryPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.persistence.entity.Category;
 import com.restaurant.system.backend_restaurant_system.dto.CategoryDTO;
@@ -20,6 +21,8 @@ import com.restaurant.system.backend_restaurant_system.service.CategoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping(path = "/Category")
@@ -52,6 +55,23 @@ public class CategoryController {
         DeleteResponseDTO response = categoryService.deleteCategoryById(id);
         HttpStatus status = response.isSuccess() ? HttpStatus.OK : HttpStatus.NOT_FOUND;
         return ResponseEntity.status(status).body(response);
+    }
+
+    @PutMapping("/Update/{id}")
+    @Operation(summary = "Actualizar una categoría por su ID")
+    public ResponseEntity<MessageDTO> updateCategoryById(@PathVariable Long id, @RequestBody CategoryDTO categoryDTO) {
+        try {
+            categoryService.updateCategory(id, categoryDTO);
+            MessageDTO response = new MessageDTO();
+            response.setStatus((long) HttpStatus.OK.value());
+            response.setMessage("Categoría actualizada exitosamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            MessageDTO response = new MessageDTO();
+            response.setStatus((long) HttpStatus.NOT_FOUND.value());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
 

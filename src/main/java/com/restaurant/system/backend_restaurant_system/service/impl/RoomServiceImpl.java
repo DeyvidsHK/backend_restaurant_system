@@ -51,6 +51,23 @@ public class RoomServiceImpl implements RoomService{
             return new DeleteResponseDTO(false, "Room not found", null);
         }
     }
+
+    @Override
+    public void updateRoom(Long id, RoomDTO roomDTO) {
+        
+        // Obtener plato por su ID
+        Optional<Room> optionalRoom = roomRepository.findById(id);
+        if (!optionalRoom.isPresent()) {
+            throw new RuntimeException("Mesa no encontrada con el ID: " + id);
+        }
+
+        Room existingRoom = optionalRoom.get();
+        existingRoom.setName(roomDTO.getName());
+        existingRoom.setCapacity(roomDTO.getCapacity());
+
+        roomRepository.save(existingRoom);
+
+    }
     
     
 }

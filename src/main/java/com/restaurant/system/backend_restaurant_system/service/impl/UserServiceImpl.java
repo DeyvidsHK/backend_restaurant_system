@@ -1,5 +1,7 @@
 package com.restaurant.system.backend_restaurant_system.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -54,6 +56,24 @@ public class UserServiceImpl implements UserService{
             response.setMessage("Usuario no encontrado");
         }
         return response;
+    }
+
+    @Override
+    public void updateUser(Long id, UserDTO userDTO) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(!optionalUser.isPresent()){
+            throw new RuntimeException("Usuario no encontrada con el ID: " + id);
+        }
+
+        User existingUser = optionalUser.get();
+        existingUser.setName(userDTO.getName());
+        existingUser.setEmail(userDTO.getEmail());
+        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setRole(userDTO.getRole());
+        existingUser.setPhone(userDTO.getPhone());
+
+        userRepository.save(existingUser);
     }
     
     

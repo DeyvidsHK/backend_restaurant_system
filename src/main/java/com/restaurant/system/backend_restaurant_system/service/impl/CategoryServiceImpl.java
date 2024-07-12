@@ -56,5 +56,19 @@ public class CategoryServiceImpl implements CategoryService {
         return response;
     }
 
+    @Override
+    public void updateCategory(Long id, CategoryDTO categoryDTO) {
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (!optionalCategory.isPresent()) {
+            throw new RuntimeException("Categoría no encontrada con el ID: " + id);
+        }
+
+        Category existingCategory = optionalCategory.get();
+        existingCategory.setCode(categoryDTO.getCode());
+        existingCategory.setName(categoryDTO.getName());
+        existingCategory.setDescription(categoryDTO.getDescription());
+
+        categoryRepository.save(existingCategory);
+    }
     
 }

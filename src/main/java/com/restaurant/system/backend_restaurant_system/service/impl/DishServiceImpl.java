@@ -69,5 +69,30 @@ public class DishServiceImpl implements DishService{
         return response;
     }
 
+    @Override
+    public void updateDish(Long id, DishDTO dishDTO) {
+
+        // Obtener plato por su ID
+        Optional<Dish> optionalDish = dishRepository.findById(id);
+        if (!optionalDish.isPresent()) {
+            throw new RuntimeException("Plato no encontrada con el ID: " + id);
+        }
+
+        // Obtener la categoría por su ID
+        Optional<Category> optionalCategory = categoryRepository.findById(dishDTO.getCategoryId());
+        
+        if (!optionalCategory.isPresent()) {
+            throw new RuntimeException("Categoria no encontrada con el ID: " + dishDTO.getCategoryId());
+        }
+
+        Dish existingDish = optionalDish.get();
+        existingDish.setName(dishDTO.getName());
+        existingDish.setCode(dishDTO.getCode());
+        existingDish.setPrice(dishDTO.getPrice());
+        existingDish.setCategory(optionalCategory.get());
+
+        dishRepository.save(existingDish);
+    }
+
     
 }

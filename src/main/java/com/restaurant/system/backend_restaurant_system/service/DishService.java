@@ -13,4 +13,6 @@ public interface DishService {
 
     DeleteResponseDTO deleteDishById(Long id);
 
+    void updateDish(Long id, DishDTO dishDTO);
+
 }

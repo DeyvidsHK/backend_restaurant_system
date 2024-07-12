@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.system.backend_restaurant_system.dto.DeleteResponseDTO;
 import com.restaurant.system.backend_restaurant_system.dto.DishDTO;
+import com.restaurant.system.backend_restaurant_system.dto.MessageDTO;
 import com.restaurant.system.backend_restaurant_system.dto.pagination.DishPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.persistence.entity.Dish;
 import com.restaurant.system.backend_restaurant_system.service.DishService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping(path = "/Dish")
@@ -57,6 +60,20 @@ public class DishController {
         return ResponseEntity.status(status).body(response);
     }
 
-
+    @PutMapping("/Update/{id}")
+    public ResponseEntity<MessageDTO> updateDishById(@PathVariable Long id, @RequestBody DishDTO DishDTO) {
+        try {
+            dishService.updateDish(id, DishDTO);
+            MessageDTO response = new MessageDTO();
+            response.setStatus((long) HttpStatus.OK.value());
+            response.setMessage("Plato actualizado exitosamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            MessageDTO response = new MessageDTO();
+            response.setStatus((long) HttpStatus.NOT_FOUND.value());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

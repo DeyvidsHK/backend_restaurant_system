@@ -13,4 +13,6 @@ public interface RoomService {
 
     DeleteResponseDTO deleteRoomById(Long id);
 
+    void updateRoom(Long id, RoomDTO roomDTO);
+
 }
