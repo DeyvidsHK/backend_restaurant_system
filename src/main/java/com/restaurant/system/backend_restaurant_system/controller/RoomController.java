@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restaurant.system.backend_restaurant_system.dto.DeleteResponseDTO;
 import com.restaurant.system.backend_restaurant_system.dto.MessageDTO;
 import com.restaurant.system.backend_restaurant_system.dto.RoomDTO;
+import com.restaurant.system.backend_restaurant_system.dto.ServiceTableDTO;
 import com.restaurant.system.backend_restaurant_system.dto.pagination.RoomPaginationDTO;
 import com.restaurant.system.backend_restaurant_system.persistence.entity.Room;
 import com.restaurant.system.backend_restaurant_system.service.RoomService;
+import com.restaurant.system.backend_restaurant_system.service.TableService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,6 +32,9 @@ public class RoomController {
 
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private TableService tableService;
 
     @GetMapping("/List")
     @Operation(summary = "Obtener lista de pisos")
@@ -48,7 +53,7 @@ public class RoomController {
     }
 
     @DeleteMapping("/Delete/{id}")
-    @Operation(summary = "Eliminar una habitación por su ID")
+    @Operation(summary = "Eliminar una Piso por su ID")
     public ResponseEntity<DeleteResponseDTO> deleteRoomById(@PathVariable Long id) {
         DeleteResponseDTO response = roomService.deleteRoomById(id);
         HttpStatus status = response.isSuccess() ? HttpStatus.OK : HttpStatus.NOT_FOUND;
@@ -56,6 +61,7 @@ public class RoomController {
     }
 
     @PutMapping("/Update/{id}")
+    @Operation(summary = "Actualizacion de Piso por su ID")
     public ResponseEntity<MessageDTO> updateRoomById(@PathVariable Long id, @RequestBody RoomDTO roomDTO) {
         try {
             roomService.updateRoom(id, roomDTO);
@@ -71,5 +77,12 @@ public class RoomController {
         }
     }
 
+    
+    @GetMapping("/Table/{id}")
+    @Operation(summary = "Busqueda de mesas por piso")
+    public ResponseEntity<ServiceTableDTO> getTableByidRoom(@PathVariable Long id) {
+        ServiceTableDTO response = tableService.getTableByIdRoom(id);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
     
 }
