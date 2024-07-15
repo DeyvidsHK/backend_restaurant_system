@@ -6,9 +6,11 @@ import com.restaurant.system.backend_restaurant_system.dto.OrderDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderPaginationDTO {
 
     private int totalPages;

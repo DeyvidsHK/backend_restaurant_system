@@ -61,12 +61,12 @@ public class UserController {
         try {
             userService.updateUser(id, userDTO);
             MessageDTO response = new MessageDTO();
-            response.setStatus((long) HttpStatus.OK.value());
+            response.setStatus(HttpStatus.OK.value());
             response.setMessage("Usuario actualizada exitosamente");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (RuntimeException e) {
             MessageDTO response = new MessageDTO();
-            response.setStatus((long) HttpStatus.NOT_FOUND.value());
+            response.setStatus(HttpStatus.NOT_FOUND.value());
             response.setMessage(e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
